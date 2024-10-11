@@ -8,7 +8,7 @@ GitHub: https://github.com/nzhang09/bios611
 
 
 ### Dockerfile:
-The Dockerfile contains the instructions to build a Docker image for this project, including the base image used (e.g., rocker/verse for R projects), and instructions for installing additional packages or software.
+The Dockerfile contains the instructions to build a Docker image for this project, including the base image used (i.e., rocker/verse), and instructions for installing additional packages or software.
 
 ### Makefile: 
 The Makefile creates the datasets used in the analysis and builds the report from R Markdown. It simplifies the workflow by defining targets and dependencies.
