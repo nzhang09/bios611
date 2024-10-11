@@ -1,0 +1,48 @@
+---
+title: "BIOS 611 Project Organization"
+author: "Ning Zhang"
+date: "2024-10-10"
+output: pdf_document
+---
+
+```{r}
+library(tidyverse)
+covid_dat_all<-read_csv("derv_data/covid_data_all.csv")
+colnames(covid_dat_all)
+```
+
+## Dataset
+
+This project will use publicly available county-level COVID-19 data to investigate the relationship between population factors (e.g., age, race and ethnicity, population density), socioeconomic status (e.g., education, poverty, GINI index, employment), health care access (e.g., insurance, urbanicitiy, crude mortality), and COVID-19 mortality. 
+
+Weekly data on per capita COVID-19 mortality in each county was downloaded from the New York Times. Data on county-level population age distribution was pulled from CDC Vintage 2020 Bridged-Race Postcensal Population Estimates. Data on county level factors was obtained from US Census 2017-2021 American Community Survey, USDA, and National Center for Health Statistics Mortality Data on CDC WONDER (2019 crude mortality rates). 
+
+References:
+
+https://www.nytimes.com/interactive/2023/us/covid-cases.html
+
+https://covid19.census.gov/datasets/21843f238cbb46b08615fc53e19e0daf/explore
+
+https://www.ers.usda.gov/data-products/rural-urban-continuum-codes/
+
+https://wonder.cdc.gov/mcd.html
+
+
+## Project Ideas
+
+1. Predictors of county-level COVID-19 mortality in the U.S. The outcome of interest is the county-level COVID-19 mortality rate per 100k population (death_per_100k), and predictors include all county-level factors in the dataset, including demographics, socioeconomic status, health care access, and crude death rate before the pandemic. Traditional regression models and dimension reduction methods will be applied in variable selection.
+
+2. Disparities of COVID-19 mortality using SuperLearner. Variables will be the same as #1, but this idea will specifically focus on comparing SuperLearner variable selection algorithms, such as generalized linear model, LASSO, and random forest. Differences in selected variables and model performance will be reported. 
+
+3. Interactive visualization of COVID-19 mortality trends. Visualize the trend of COVID-19 mortality rate per 100k population (death_per_100k) across key factors, e.g., geographical region, COVID-19 pandemic waves (Delta, Omicron etc.), policy changes (pre-vaccination, post-booster etc.). Iteractive plots will be the major deliverables.
+
+4. Relationship between access to care and COVID-19 mortality. Regression analysis will be performed to evaluate whether rural counties, or counties with higher rates of uninsured individuals have higher COVID-19 mortality rates during the pandemic. Potential confounders such as demographics (e.g., population density, age distribution) will be adjusted.
+
+5. Socioeconomic inequalities and COVID-19 mortality. This idea will focus on the correlation between county-level income inequalities (e.g., GINI index, median household income) and COVID-19 mortality, controlling for age and urbanicity.
+
+
+
+
+
+
+
