@@ -5,6 +5,79 @@ date: "2024-10-10"
 output: pdf_document
 ---
 
+Everything has been pushed to GitHub: https://github.com/nzhang09/bios611. Since canvas doesn't support plain text submission, I copied my README file, Docker file, and Makefile in this report.Rmd for grading purpose. Thanks for understanding!
+
+# README file:
+```{r}
+# # BIOS 611 Project -- COVID-19 Mortality in the U.S.
+# 
+# Ning Zhang
+# 
+# ning.zhang@unc.edu
+# 
+# GitHub: https://github.com/nzhang09/bios611
+# 
+# 
+# ### Dockerfile:
+# The Dockerfile contains the instructions to build a Docker image for this project, 
+# including the base image used (i.e., rocker/verse), and instructions for installing 
+# additional packages or software.
+# 
+# ### Makefile: 
+# The Makefile creates the datasets used in the analysis and builds the report from R Markdown. 
+# It simplifies the workflow by defining targets and dependencies.
+# 
+# ### report.Rmd:
+# The report.Rmd is an R Markdown file that generates a pdf report, 
+# which contains description of the dataset, column names, and potential project ideas.
+```
+
+# Dockerfile
+```{r}
+#Docker file
+# FROM rocker/verse
+# 
+# # Update package list, install man-db, and clean up
+# RUN apt-get update && \
+#     apt-get install -y man-db && \
+#     apt-get clean && \
+#     rm -rf /var/lib/apt/lists/*
+# 
+# # Set the default command
+# CMD ["/init"]
+```
+
+# Makefile
+```{r}
+#Makefile
+# .PHONY: clean
+# .PHONY: init
+# 
+# init:
+# 	mkdir -p derv_data
+# 	mkdir -p figures
+# 	mkdir -p logs
+# 
+# clean:
+# 	rm -rf derv_data
+# 	rm -rf figures
+# 	mkdir -p derv_data
+# 	mkdir -p figures
+# 	mkdir -p logs
+# 
+# #This creates a complete dataset by combining COVID-19 mortality data, age distribution, 
+# and county-level covariates.
+# #Incomplete cases are removed.
+# derv_data/covid_data_all.csv: orgdata/usa_population_age_county.csv orgdata/county_dat.csv
+# orgdata/nyt_reported_covid19_june23.parquet covid_data.R
+# 	Rscript covid_data.R
+# 
+# report.pdf: report.Rmd
+# 	Rscript -e "rmarkdown::render('report.Rmd')"
+```
+
+
+# Project
 ```{r}
 library(tidyverse)
 covid_dat_all<-read_csv("derv_data/covid_data_all.csv")
