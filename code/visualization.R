@@ -23,7 +23,6 @@ cor_plot<-ggplot(cor_dat, aes(x=Var1, y=Var2, fill=value)) +
   theme_minimal()+
   theme(axis.text.x=element_text(angle=45, vjust=1, hjust=1)) +
   labs(x=NULL, y=NULL, title="Figure 2. Correlation matrix")
-cor_plot
 ggsave("figures/correlation_matrix.png", plot=cor_plot, height=7, width=8)
 
 #Observed death rate map----
@@ -35,7 +34,6 @@ obs_map<-usmap::plot_usmap(regions="counties", data=covid_dat_all_modeling, valu
         legend.title=element_text(size=13),
         legend.text=element_text(size=11), 
         plot.title=element_text(size=14))
-
 ggsave("figures/observed_death.png", plot=obs_map, height=6, width=8)
 
 #Linear regression prediction----
@@ -60,7 +58,6 @@ lm_res_plot<-ggplot(covid_dat_all_modeling, aes(x=res_lm)) +
   theme(plot.margin = unit(c(1,1,1,1),"cm"))
 
 lm_plot<-cowplot::plot_grid(lm_pred_plot, lm_res_plot, ncol=2)
-lm_plot
 ggsave("figures/linear_reg.png", plot=lm_plot, height=6, width=12)
 
 #LASSO prediction----
@@ -85,7 +82,6 @@ lasso_res_plot<-ggplot(covid_dat_all_modeling, aes(x=res_lasso)) +
   theme(plot.margin = unit(c(1,1,1,1),"cm"))
 
 lasso_plot<-cowplot::plot_grid(lasso_pred_plot, lasso_res_plot, ncol=2)
-lasso_plot
 ggsave("figures/lasso.png", plot=lasso_plot, height=6, width=12)
 
 #Elastic net prediction----
@@ -110,5 +106,4 @@ net_res_plot<-ggplot(covid_dat_all_modeling, aes(x=res_net)) +
   theme(plot.margin = unit(c(1,1,1,1),"cm"))
 
 net_plot<-cowplot::plot_grid(net_pred_plot, net_res_plot, ncol=2)
-net_plot
 ggsave("figures/net.png", plot=net_plot, height=6, width=12)
