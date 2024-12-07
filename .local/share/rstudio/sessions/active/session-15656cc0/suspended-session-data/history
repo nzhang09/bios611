@@ -1,0 +1,512 @@
+dat_fig2[2*i-1, ]<-pd_fig2[i, ]
+}
+dat_fig2<-dat_fig2[nrow(dat_fig2):1, ]
+dat_fig2[is.na(dat_fig2)]<-"REF."
+pr_fig3<-t(matrix(fig3$`PR (95% CI)`, nrow=4))
+pd_fig3<-t(matrix(fig3$`PD (95% CI)`, nrow=4))
+dat_fig3<-matrix(NA, nrow=2*nrow(pr_fig3), ncol=4)
+for (i in 1:nrow(pr_fig3)) {
+dat_fig3[2*i, ]<-pr_fig3[i, ]
+dat_fig3[2*i-1, ]<-pd_fig3[i, ]
+}
+dat_fig3<-dat_fig3[nrow(dat_fig3):1, ]
+dat_fig3[is.na(dat_fig3)]<-"REF."
+write.csv(dat_fig2, file="table2_fig2.csv", row.names=F)
+write.csv(dat_fig3, file="table2_fig3.csv", row.names=F)
+pr_fig2
+pd_fig2
+dat_fig2<-matrix(NA, nrow=2*nrow(pr_fig2), ncol=4)
+for (i in 1:nrow(pr_fig2)) {
+dat_fig2[2*i, ]<-pr_fig2[i, ]
+dat_fig2[2*i-1, ]<-pd_fig2[i, ]
+}
+dat_fig2
+dat_fig2<-dat_fig2[nrow(dat_fig2):1, ]
+dat_fig2
+dat_fig2<-matrix(NA, nrow=2*nrow(pr_fig2), ncol=4)
+dat_fig2
+for (i in 1:nrow(pr_fig2)) {
+dat_fig2[2*i, ]<-pr_fig2[i, ]
+dat_fig2[2*i-1, ]<-pd_fig2[i, ]
+}
+dat_fig2
+dat_fig2<-matrix(NA, nrow=2*nrow(pr_fig2), ncol=4)
+for (i in 1:nrow(pr_fig2)) {
+dat_fig2[2*i-1, ]<-pr_fig2[i, ]
+dat_fig2[2*i, ]<-pd_fig2[i, ]
+}
+dat_fig2
+#Table 2
+setwd("/Users/ningzhang/Desktop/UNC/research/SIS")
+library(readxl)
+table2<-read_excel("SIS_prevalence_diff.xlsx", sheet="new Table 2")
+fig1<-table2[1:16, ]
+fig2<-table2[18:89, ]
+fig3<-table2[91:118, ]
+pr_fig1<-t(matrix(fig1$`PR (95% CI)`, nrow=4))
+pd_fig1<-t(matrix(fig1$`PD (95% CI)`, nrow=4))
+dat_fig1<-matrix(NA, nrow=2*nrow(pr_fig1), ncol=4)
+for (i in 1:nrow(pr_fig1)) {
+dat_fig1[2*i-1, ]<-pr_fig1[i, ]
+dat_fig1[2*i, ]<-pd_fig1[i, ]
+}
+# dat_fig1<-dat_fig1[nrow(dat_fig1):1, ]
+dat_fig1[is.na(dat_fig1)]<-"REF."
+pr_fig2<-t(matrix(fig2$`PR (95% CI)`, nrow=4))
+pd_fig2<-t(matrix(fig2$`PD (95% CI)`, nrow=4))
+dat_fig2<-matrix(NA, nrow=2*nrow(pr_fig2), ncol=4)
+for (i in 1:nrow(pr_fig2)) {
+dat_fig2[2*i-1, ]<-pr_fig2[i, ]
+dat_fig2[2*i, ]<-pd_fig2[i, ]
+}
+# dat_fig2<-dat_fig2[nrow(dat_fig2):1, ]
+dat_fig2[is.na(dat_fig2)]<-"REF."
+pr_fig3<-t(matrix(fig3$`PR (95% CI)`, nrow=4))
+pd_fig3<-t(matrix(fig3$`PD (95% CI)`, nrow=4))
+dat_fig3<-matrix(NA, nrow=2*nrow(pr_fig3), ncol=4)
+for (i in 1:nrow(pr_fig3)) {
+dat_fig3[2*i-1, ]<-pr_fig3[i, ]
+dat_fig3[2*i, ]<-pd_fig3[i, ]
+}
+# dat_fig3<-dat_fig3[nrow(dat_fig3):1, ]
+dat_fig3[is.na(dat_fig3)]<-"REF."
+dat_fig1
+pr_fig2<-t(matrix(fig2$`PR (95% CI)`, nrow=4))
+pd_fig2<-t(matrix(fig2$`PD (95% CI)`, nrow=4))
+dat_fig2<-matrix(NA, nrow=2*nrow(pr_fig2), ncol=4)
+for (i in 1:nrow(pr_fig2)) {
+dat_fig2[2*i-1, ]<-pr_fig2[i, ]
+dat_fig2[2*i, ]<-pd_fig2[i, ]
+}
+# dat_fig2<-dat_fig2[nrow(dat_fig2):1, ]
+dat_fig2[is.na(dat_fig2)]<-"REF."
+write.csv(dat_fig2, file="table2_fig2.csv", row.names=F)
+write.csv(dat_fig1, file="table2_fig1.csv", row.names=F)
+dat_fig2
+write.csv(dat_fig3, file="table2_fig3.csv", row.names=F)
+?CVTuningCov
+71.73/91.73
+#Overall Regression Data
+setwd("/Users/ningzhang/Desktop/UNC/research/covid/COVID19_Impacts")
+library(tidyverse)
+library(covidcast)
+library(ranger)
+library(lubridate)
+library(gtsummary)
+#Data sources----
+#Age distribution
+age_dat<-read_csv("data/usa_population_age_county.csv")%>%
+mutate(age_prop=age_prop*100)%>%
+dplyr::select(fips, age_groups, age_prop)%>%
+pivot_wider(names_from=age_groups, values_from = age_prop)
+#County level demographics
+cnty_cov_dat<-read_csv("data/county_dat.csv")
+#COVID death
+covid_dat<-arrow::read_parquet("data/nyt_reported_covid19_june23.parquet")%>%
+filter(target=="deaths_cum", level=="county")%>%
+mutate(deaths_per_100k=value/population*100000)%>%
+group_by(fips, county, state, population, abbreviation)%>%
+summarize(deaths_per_100k=max(deaths_per_100k))%>%
+ungroup()%>%
+filter(deaths_per_100k>0)
+head(age)
+head(age_dat)
+head(cnty_cov_dat)
+head(covid_dat)
+#Bring death and age distributions together
+covid_dat_all<-covid_dat %>%
+inner_join(cnty_cov_dat) %>%
+inner_join(age_dat)
+covid_dat_all<-covid_dat_all[complete.cases(covid_dat_all),]
+#Merge datasets
+covid_dat_all<-covid_dat %>%
+inner_join(cnty_cov_dat) %>%
+inner_join(age_dat)
+covid_dat_all<-covid_dat_all[complete.cases(covid_dat_all),]
+colnames(covid_dat_all)
+setwd("/Users/ningzhang/Desktop/UNC/course/2024fall/bios611/project")
+#Data sources----
+#Age distribution
+age_dat<-read_csv("data/usa_population_age_county.csv")%>%
+mutate(age_prop=age_prop*100)%>%
+dplyr::select(fips, age_groups, age_prop)%>%
+pivot_wider(names_from=age_groups, values_from = age_prop)
+#County level demographics
+cnty_cov_dat<-read_csv("data/county_dat.csv")
+setwd("/Users/ningzhang/Desktop/UNC/course/2024fall/bios611/project")
+#Data sources----
+#Age distribution
+age_dat<-read_csv("orgdata/usa_population_age_county.csv")%>%
+mutate(age_prop=age_prop*100)%>%
+dplyr::select(fips, age_groups, age_prop)%>%
+pivot_wider(names_from=age_groups, values_from = age_prop)
+#County level demographics
+cnty_cov_dat<-read_csv("orgdata/county_dat.csv")
+#COVID death
+covid_dat<-arrow::read_parquet("orgdata/nyt_reported_covid19_june23.parquet")%>%
+filter(target=="deaths_cum", level=="county")%>%
+mutate(deaths_per_100k=value/population*100000)%>%
+group_by(fips, county, state, population, abbreviation)%>%
+summarize(deaths_per_100k=max(deaths_per_100k))%>%
+ungroup()%>%
+filter(deaths_per_100k>0)
+#Merge datasets
+covid_dat_all<-covid_dat %>%
+inner_join(cnty_cov_dat) %>%
+inner_join(age_dat)
+covid_dat_all<-covid_dat_all[complete.cases(covid_dat_all),]
+write.csv(covid_dat_all, "derv_data/covid_data_all.csv", row.names=F)
+#Descriptive stats----
+colnames(covid_dat_all)
+#Descriptive stats----
+head(covid_dat_all)
+colnames(covid_dat_all)
+covid_dat_all<-read_csv("derv_data/covid_data_all.csv")
+??get_acs
+15^2*pi
+15^2*pi*30
+152/9*15
+#Q1
+#k-means: data frame with n rows
+my_kmeans<-function(data, k){
+cluster_labels<-sample(1:k, nrow(data), replace=T) # we guess randomly the nth row goes into cluster k
+data_mat<-data %>%
+as.matrix()
+#calculate the centroids
+centroids<-c()
+for (i in 1:k) {
+submat<-data_mat[i==cluster_labels,]
+centroid<-colMeans(submat)
+centroids<-rbind(centroids, centroid)
+}
+iteration<-0
+old_centroids<-centroids
+while (T) {
+iteration<-iteration+1
+# old_centroids<-centroids
+for (i in 1:nrow(data_mat)) {
+row<-data_mat[i,]
+min_d<-Inf
+min_j<-0
+for (j in 1:k) {
+d<-sqrt(sum((row-centroids[j,])*(row-centroids[j,])))
+# cat(sprintf("d between %d %d is %f\n", i, j, d))
+if(d<min_d){
+min_d<-d
+min_j<-j}
+}
+cluster_labels[i]<-min_j
+}
+old_centroids<-centroids
+centroids<-c()
+for (i in 1:k) {
+submat<-data_mat[i==cluster_labels,]
+centroid<-colMeans(submat)
+centroids<-rbind(centroids, centroid)
+}
+centroid_diff<-old_centroids-centroids
+centroids_distances<-mean(rowSums(centroid_diff * centroid_diff))
+cat(sprintf("Iteration %d centroid differences %f.\n", iteration, centroids_distances))
+if(centroids_distances<1e-6){
+break
+}
+}
+return(cluster_labels)
+}
+#Q2
+library(tibble)
+set.seed(123)
+n<-100
+data_1<-tibble(
+dist1 = rnorm(n, mean = 5, sd = 1),
+dist2 = rnorm(n, mean = 0, sd = 1),
+dist3 = rnorm(n, mean = 0, sd = 1),
+dist4 = rnorm(n, mean = 0, sd = 1),
+dist5 = rnorm(n, mean = 0, sd = 1)
+)
+data_2<-tibble(
+dist1 = rnorm(n, mean = -5, sd = 1),
+dist2 = rnorm(n, mean = 0, sd = 1),
+dist3 = rnorm(n, mean = 0, sd = 1),
+dist4 = rnorm(n, mean = 0, sd = 1),
+dist5 = rnorm(n, mean = 0, sd = 1)
+)
+data_3<-tibble(
+dist1 = rnorm(n, mean = 0, sd = 1),
+dist2 = rnorm(n, mean = 0, sd = 1),
+dist3 = rnorm(n, mean = 0, sd = 1),
+dist4 = rnorm(n, mean = 3, sd = 1),
+dist5 = rnorm(n, mean = 0, sd = 1)
+)
+data_4<-tibble(
+dist1 = rnorm(n, mean = 0, sd = 1),
+dist2 = rnorm(n, mean = 0, sd = 1),
+dist3 = rnorm(n, mean = 0, sd = 1),
+dist4 = rnorm(n, mean = -2, sd = 1),
+dist5 = rnorm(n, mean = 0, sd = 1)
+)
+data_5<-tibble(
+dist1 = rnorm(n, mean = 4, sd = 1),
+dist2 = rnorm(n, mean = 0, sd = 1),
+dist3 = rnorm(n, mean = 0, sd = 1),
+dist4 = rnorm(n, mean = -3, sd = 1),
+dist5 = rnorm(n, mean = 0, sd = 1)
+)
+data_q2<-rbind(data_1, data_2, data_3, data_4, data_5)
+my_kmeans(data_q2, 5)
+gen_data<-function(r){
+data_1<-tibble(
+dist1 = rnorm(n, mean = r*5, sd = 1),
+dist2 = rnorm(n, mean = 0, sd = 1),
+dist3 = rnorm(n, mean = 0, sd = 1),
+dist4 = rnorm(n, mean = 0, sd = 1),
+dist5 = rnorm(n, mean = 0, sd = 1)
+)
+data_2<-tibble(
+dist1 = rnorm(n, mean = -5*r, sd = 1),
+dist2 = rnorm(n, mean = 0, sd = 1),
+dist3 = rnorm(n, mean = 0, sd = 1),
+dist4 = rnorm(n, mean = 0, sd = 1),
+dist5 = rnorm(n, mean = 0, sd = 1)
+)
+data_3<-tibble(
+dist1 = rnorm(n, mean = 0, sd = 1),
+dist2 = rnorm(n, mean = 0, sd = 1),
+dist3 = rnorm(n, mean = 0, sd = 1),
+dist4 = rnorm(n, mean = 3*r, sd = 1),
+dist5 = rnorm(n, mean = 0, sd = 1)
+)
+data_4<-tibble(
+dist1 = rnorm(n, mean = 0, sd = 1),
+dist2 = rnorm(n, mean = 0, sd = 1),
+dist3 = rnorm(n, mean = 0, sd = 1),
+dist4 = rnorm(n, mean = -2*r, sd = 1),
+dist5 = rnorm(n, mean = 0, sd = 1)
+)
+data_5<-tibble(
+dist1 = rnorm(n, mean = 4*r, sd = 1),
+dist2 = rnorm(n, mean = 0, sd = 1),
+dist3 = rnorm(n, mean = 0, sd = 1),
+dist4 = rnorm(n, mean = -3*r, sd = 1),
+dist5 = rnorm(n, mean = 0, sd = 1)
+)
+data_q5<-rbind(data_1, data_2, data_3, data_4, data_5)
+return(data_q5)
+}
+data_q5<-gen_data(r=0.1)
+#we would always get 5 clusters but the labels should be messy
+my_kmeans(gen_data(r=0.1), k=5)
+#we would always get 5 clusters but the labels should be messy
+my_kmeans(gen_data(r=1), k=5)
+#we would always get 5 clusters but the labels should be messy
+my_kmeans(gen_data(r=0.2), k=5)
+#we would always get 5 clusters but the labels should be messy
+my_kmeans(gen_data(r=0.2), k=5)
+synth<-function(r, n_per=100){
+means <- list(
+r * c(5, 0, 0, 0, 0),
+r * c(-5, 0, 0, 0, 0),
+r * c(0, 0, 0, 3, 0),
+r * c(0, 0, 0, -2, 0),
+r * c(4, 0, 0, -3, 0))
+d<-tibble(X1=c(), X2=c(), X3=c(), X4=c(), X5=c())
+for (m in 1:means) {
+sd<-tibble(X1=rnorm(n_per, m[1]),
+X2=rnorm(n_per, m[2]),
+X3=rnorm(n_per, m[3]),
+X4=rnorm(n_per, m[4]),
+X5=rnorm(n_per, m[5]))
+d<-rbind(d, sd)
+}
+d
+}
+synth(1)
+synth<-function(r, n_per=100){
+means <- list(
+r * c(5, 0, 0, 0, 0),
+r * c(-5, 0, 0, 0, 0),
+r * c(0, 0, 0, 3, 0),
+r * c(0, 0, 0, -2, 0),
+r * c(4, 0, 0, -3, 0))
+d<-tibble(X1=c(), X2=c(), X3=c(), X4=c(), X5=c())
+for (m in means) {
+sd<-tibble(X1=rnorm(n_per, m[1]),
+X2=rnorm(n_per, m[2]),
+X3=rnorm(n_per, m[3]),
+X4=rnorm(n_per, m[4]),
+X5=rnorm(n_per, m[5]))
+d<-rbind(d, sd)
+}
+d
+}
+synth(1)
+seq(0, 3, length.out=10)
+?clusGap
+for (r in seq(0, 3, length.out=3)) {
+data_set<-synth(r)
+results<-clusGap(data_set, kmeans, 10)
+print(result)
+}
+for (r in seq(0, 3, length.out=3)) {
+data_set<-synth(r)
+results<-clusGap(data_set, kmeans, 10)
+print(results)
+}
+results
+results$n
+results$Tab
+plot(results)
+optimal_k <- which.max(results$Tab[, "gap"])
+optimal_k
+which.max(results$Tab[, "gap"])
+optimal_k <- which.max(results$Tab[, "gap"])
+cat("Optimal number of clusters:", optimal_k, "\n")
+print(results, method="Tibs2001SEmax")
+print(results, method="Tibs2001SEmax")
+print(results)
+print(results, method="Tibs2001SEmax")
+names(print(results, method="Tibs2001SEmax"))
+results$Tab
+which.max(results$Tab[, "gap"])
+results$Tab[, "gap"]
+?>maxSE
+for (r in seq(0, 3, length.out=3)) {
+data_set<-synth(r)
+results<-clusGap(data_set, kmeans, 10)
+print(results)
+nc<-maxSE(
+results$Tab[, "gap"],
+results$Tab[, "SE.sim"],
+method="Tibs2001SEmax",
+SE.factor=1)
+print(nc)
+}
+rs<-c()
+ncs<-c()
+for (r in seq(0, 3, length.out=3)) {
+data_set<-synth(r)
+results<-clusGap(data_set, kmeans, 10)
+nc<-maxSE(
+results$Tab[, "gap"],
+results$Tab[, "SE.sim"],
+method="Tibs2001SEmax",
+SE.factor=1)
+rs<-c(rs, r)
+ncs<-c(ncs, nc)
+}
+rs<-c()
+ncs<-c()
+for (r in seq(0, 3, length.out=3)) {
+data_set<-synth(r)
+results<-clusGap(data_set, kmeans, 10)
+nc<-maxSE(
+results$Tab[, "gap"],
+results$Tab[, "SE.sim"],
+method="Tibs2001SEmax",
+SE.factor=1)
+rs<-c(rs, r)
+ncs<-c(ncs, nc)
+}
+ncs_df<-tibble(r=rs, nc=ncs)
+ncs_df
+rs<-c()
+ncs<-c()
+for (r in seq(0, 5, length.out=10)) {
+data_set<-synth(r)
+results<-clusGap(data_set, kmeans, 10)
+nc<-maxSE(
+results$Tab[, "gap"],
+results$Tab[, "SE.sim"],
+method="Tibs2001SEmax",
+SE.factor=1)
+rs<-c(rs, r)
+ncs<-c(ncs, nc)
+}
+ncs_df<-tibble(r=rs, nc=ncs)
+ncs_df
+synth<-function(r, n_per=1000){
+means <- list(
+r * c(5, 0, 0, 0, 0),
+r * c(-5, 0, 0, 0, 0),
+r * c(0, 0, 0, 3, 0),
+r * c(0, 0, 0, -2, 0),
+r * c(4, 0, 0, -3, 0))
+d<-tibble(X1=c(), X2=c(), X3=c(), X4=c(), X5=c())
+for (m in means) {
+sd<-tibble(X1=rnorm(n_per, m[1]),
+X2=rnorm(n_per, m[2]),
+X3=rnorm(n_per, m[3]),
+X4=rnorm(n_per, m[4]),
+X5=rnorm(n_per, m[5]))
+d<-rbind(d, sd)
+}
+d
+}
+synth(1)
+rs<-c()
+ncs<-c()
+for (r in seq(0, 5, length.out=10)) {
+data_set<-synth(r)
+results<-clusGap(data_set, kmeans, 10)
+nc<-maxSE(
+results$Tab[, "gap"],
+results$Tab[, "SE.sim"],
+method="Tibs2001SEmax",
+SE.factor=1)
+rs<-c(rs, r)
+ncs<-c(ncs, nc)
+}
+synth<-function(r, n_per=200){
+means <- list(
+r * c(5, 0, 0, 0, 0),
+r * c(-5, 0, 0, 0, 0),
+r * c(0, 0, 0, 3, 0),
+r * c(0, 0, 0, -2, 0),
+r * c(4, 0, 0, -3, 0))
+d<-tibble(X1=c(), X2=c(), X3=c(), X4=c(), X5=c())
+for (m in means) {
+sd<-tibble(X1=rnorm(n_per, m[1]),
+X2=rnorm(n_per, m[2]),
+X3=rnorm(n_per, m[3]),
+X4=rnorm(n_per, m[4]),
+X5=rnorm(n_per, m[5]))
+d<-rbind(d, sd)
+}
+d
+}
+synth(1)
+rs<-c()
+ncs<-c()
+for (r in seq(0, 3, length.out=10)) {
+data_set<-synth(r)
+results<-clusGap(data_set, kmeans, 10)
+nc<-maxSE(
+results$Tab[, "gap"],
+results$Tab[, "SE.sim"],
+method="Tibs2001SEmax",
+SE.factor=1)
+rs<-c(rs, r)
+ncs<-c(ncs, nc)
+}
+ncs_df<-tibble(r=rs, nc=ncs)
+ncs_df
+138/3141
+12/3141
+101/2990
+2725/3141
+24.99/101/12
+11.99/540
+1/213
+21.99/12/242
+18.99/12/242
+18.99*0.8/12/242
+18.99*0.8/12/
+363
+16.99*0.8/242/12
+11.99*0.8/6/363
+363*12
+242*16
+28*2.54
+60/2.54
+reticulate::repl_python()
+reticulate::repl_python()

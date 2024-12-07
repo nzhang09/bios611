@@ -5,7 +5,7 @@ date: "2024-10-10"
 output: pdf_document
 ---
 
-Everything has been pushed to GitHub: https://github.com/nzhang09/bios611. Since canvas doesn't support plain text submission, I copied my README file, Docker file, and Makefile in this report.Rmd for grading purpose. Thanks for understanding!
+Everything has been pushed to GitHub: https://github.com/nzhang09/bios611. Since canvas doesn't support plain text submission, I copied my README file, Docker file, and Makefile in this report_canvas.Rmd for grading purpose. Thanks for understanding!
 
 # README file:
 ```{r}
