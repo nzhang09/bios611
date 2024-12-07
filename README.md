@@ -8,9 +8,13 @@ GitHub: https://github.com/nzhang09/bios611
 
 
 ### Dockerfile:
-The Dockerfile contains the instructions to build a Docker image for this project, including the base image used (i.e., rocker/verse), and instructions for installing additional R packages. After navigating to your working directory, please replace "/your/working/directory" with your local working directory, and build the docker container by running the following commands.
+The Dockerfile contains the instructions to build a Docker image for this project, including the base image used (i.e., rocker/verse), and instructions for installing additional R packages. After navigating to your working directory, you can build the docker container by running the line below.
 ```
 docker build . -t nz611
+```
+
+To start the docker container, please replace "/your/working/directory" with your local working directory, and run the line below. (Note: `--platform linux/amd64` is needed for Mac M3 chip users. If you are a Windows user, you probably don't need this command.)
+```
 docker run --rm -ti --platform linux/amd64 -e PASSWORD=yourpassword -p 8787:8787 -v "/your/working/directory":/home/rstudio/ rocker/verse
 ```
 
