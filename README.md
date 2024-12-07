@@ -21,7 +21,7 @@ docker run --rm -ti --platform linux/amd64 -e PASSWORD=yourpassword -p 8787:8787
 Open web browser http://localhost:8787/, please log in with username "rstudio" and password "yourpassword". Then you should be able to see a list of project files in the right bottom panel "Files" tab.
 
 ### Makefile: 
-The Makefile creates the datasets used in the analysis and builds the report from R Markdown html. It simplifies the workflow by defining targets and dependencies. 
+The Makefile creates all the datasets and figures, and builds the report from R Markdown. It simplifies the workflow by defining targets and dependencies. 
 
 ### report.Rmd:
 The report.Rmd is an R Markdown file that generates the html report. Please use the Terminal in the docker container and run
