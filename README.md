@@ -8,7 +8,7 @@ GitHub: https://github.com/nzhang09/bios611
 
 
 ### Dockerfile:
-Note: `linux/amd64` in the dockerfile is needed for Mac M3 chip users. If you are a Windows user, you probably don't need this command.
+Note: `linux/amd64` in the dockerfile is needed for Mac M3 users. Windows users probably don't need this command.
 
 The Dockerfile contains the instructions to build a Docker image for this project, including the base image (i.e., rocker/verse), and instructions for installing additional R packages. After navigating to your working directory, you can build the docker container by running the line below.
 ```
@@ -20,7 +20,7 @@ To start the docker container, please replace "/your/working/directory" with you
 docker run --rm -ti --platform linux/amd64 -e PASSWORD=yourpassword -p 8787:8787 -v "/your/working/directory":/home/rstudio/ rocker/verse
 ```
 
-Open web browser http://localhost:8787/, please log in with username "rstudio" and password "yourpassword". Then you should be able to see a list of project files in the right bottom panel "Files" tab.
+Then please open web browser http://localhost:8787/ and log in with username "rstudio" and password "yourpassword". Then you can see a list of project files in the right bottom panel "Files" tab.
 
 ### Makefile: 
 The Makefile creates all the datasets and figures, and builds the report from R Markdown. It simplifies the workflow by defining targets and dependencies. 
