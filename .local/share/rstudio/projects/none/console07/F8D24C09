@@ -52,3 +52,131 @@ Output created: report.html
 ]0;~[?2004hrstudio@c9c25d7c15bb:~$ [Krstudio@c9c25d7c15bb:~$ [Krstudio@c9c25d7c15bb:~$ r[Kmake report.html
 [?2004lmake: 'report.html' is up to date.
 ]0;~[?2004hrstudio@c9c25d7c15bb:~$ [?2004l[?2004h[?2004l
+]0;~[?2004hrstudio@3b76d112d986:~$ make report/[K.html
+[?2004lRscript code/visualization.R
+── [1mAttaching core tidyverse packages[22m ────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+[32m✔[39m [34mdplyr    [39m 1.1.4     [32m✔[39m [34mreadr    [39m 2.1.5
+[32m✔[39m [34mforcats  [39m 1.0.0     [32m✔[39m [34mstringr  [39m 1.5.1
+[32m✔[39m [34mggplot2  [39m 3.5.1     [32m✔[39m [34mtibble   [39m 3.2.1
+[32m✔[39m [34mlubridate[39m 1.9.3     [32m✔[39m [34mtidyr    [39m 1.3.1
+[32m✔[39m [34mpurrr    [39m 1.0.2     
+── [1mConflicts[22m ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+[36mℹ[39m Use the conflicted package ([3m[34m<http://conflicted.r-lib.org/>[39m[23m) to force all conflicts to become errors
+[?25hError in library(cowplot) : there is no package called ‘cowplot’
+Execution halted
+[?25hmake: *** [Makefile:26: figures/correlation_matrix.png] Error 1
+]0;~[?2004hrstudio@3b76d112d986:~$ [?2004l[?2004h[?2004l
+]0;~[?2004hrstudio@69b63614f26e:~$ make report.html
+[?2004lRscript code/visualization.R
+── [1mAttaching core tidyverse packages[22m ────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+[32m✔[39m [34mdplyr    [39m 1.1.4     [32m✔[39m [34mreadr    [39m 2.1.5
+[32m✔[39m [34mforcats  [39m 1.0.0     [32m✔[39m [34mstringr  [39m 1.5.1
+[32m✔[39m [34mggplot2  [39m 3.5.1     [32m✔[39m [34mtibble   [39m 3.2.1
+[32m✔[39m [34mlubridate[39m 1.9.3     [32m✔[39m [34mtidyr    [39m 1.3.1
+[32m✔[39m [34mpurrr    [39m 1.0.2     
+── [1mConflicts[22m ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+[36mℹ[39m Use the conflicted package ([3m[34m<http://conflicted.r-lib.org/>[39m[23m) to force all conflicts to become errors
+[?25hError in library(cowplot) : there is no package called ‘cowplot’
+Execution halted
+[?25hmake: *** [Makefile:26: figures/correlation_matrix.png] Error 1
+]0;~[?2004hrstudio@69b63614f26e:~$ [?2004l[?2004h[?2004l
+make report.html
+[?2004lRscript code/visualization.R
+── [1mAttaching core tidyverse packages[22m ────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+[32m✔[39m [34mdplyr    [39m 1.1.4     [32m✔[39m [34mreadr    [39m 2.1.5
+[32m✔[39m [34mforcats  [39m 1.0.0     [32m✔[39m [34mstringr  [39m 1.5.1
+[32m✔[39m [34mggplot2  [39m 3.5.1     [32m✔[39m [34mtibble   [39m 3.2.1
+[32m✔[39m [34mlubridate[39m 1.9.3     [32m✔[39m [34mtidyr    [39m 1.3.1
+[32m✔[39m [34mpurrr    [39m 1.0.2     
+── [1mConflicts[22m ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+[36mℹ[39m Use the conflicted package ([3m[34m<http://conflicted.r-lib.org/>[39m[23m) to force all conflicts to become errors
+[?25hError in library(cowplot) : there is no package called ‘cowplot’
+Execution halted
+[?25hmake: *** [Makefile:26: figures/correlation_matrix.png] Error 1
+]0;~[?2004hrstudio@c581f67e2c3c:~$ make h[Kreport.html
+[?2004lRscript code/visualization.R
+── [1mAttaching core tidyverse packages[22m ────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+[32m✔[39m [34mdplyr    [39m 1.1.4     [32m✔[39m [34mreadr    [39m 2.1.5
+[32m✔[39m [34mforcats  [39m 1.0.0     [32m✔[39m [34mstringr  [39m 1.5.1
+[32m✔[39m [34mggplot2  [39m 3.5.1     [32m✔[39m [34mtibble   [39m 3.2.1
+[32m✔[39m [34mlubridate[39m 1.9.3     [32m✔[39m [34mtidyr    [39m 1.3.1
+[32m✔[39m [34mpurrr    [39m 1.0.2     
+── [1mConflicts[22m ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+[36mℹ[39m Use the conflicted package ([3m[34m<http://conflicted.r-lib.org/>[39m[23m) to force all conflicts to become errors
+[?25hError in library(cowplot) : there is no package called ‘cowplot’
+Execution halted
+[?25hmake: *** [Makefile:26: figures/correlation_matrix.png] Error 1
+]0;~[?2004hrstudio@c581f67e2c3c:~$ [?2004l[?2004h[?2004l
+]0;~[?2004hrstudio@a3d060aa9bf1:~$ make report.html
+[?2004lRscript code/visualization.R
+── [1mAttaching core tidyverse packages[22m ────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+[32m✔[39m [34mdplyr    [39m 1.1.4     [32m✔[39m [34mreadr    [39m 2.1.5
+[32m✔[39m [34mforcats  [39m 1.0.0     [32m✔[39m [34mstringr  [39m 1.5.1
+[32m✔[39m [34mggplot2  [39m 3.5.1     [32m✔[39m [34mtibble   [39m 3.2.1
+[32m✔[39m [34mlubridate[39m 1.9.3     [32m✔[39m [34mtidyr    [39m 1.3.1
+[32m✔[39m [34mpurrr    [39m 1.0.2     
+── [1mConflicts[22m ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+[36mℹ[39m Use the conflicted package ([3m[34m<http://conflicted.r-lib.org/>[39m[23m) to force all conflicts to become errors
+[?25hError in library(cowplot) : there is no package called ‘cowplot’
+Execution halted
+[?25hmake: *** [Makefile:26: figures/correlation_matrix.png] Error 1
+]0;~[?2004hrstudio@a3d060aa9bf1:~$ [?2004l[?2004h[?2004l
+make re[K[Kreport.html
+[?2004lRscript code/visualization.R
+── [1mAttaching core tidyverse packages[22m ────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+[32m✔[39m [34mdplyr    [39m 1.1.4     [32m✔[39m [34mreadr    [39m 2.1.5
+[32m✔[39m [34mforcats  [39m 1.0.0     [32m✔[39m [34mstringr  [39m 1.5.1
+[32m✔[39m [34mggplot2  [39m 3.5.1     [32m✔[39m [34mtibble   [39m 3.2.1
+[32m✔[39m [34mlubridate[39m 1.9.3     [32m✔[39m [34mtidyr    [39m 1.3.1
+[32m✔[39m [34mpurrr    [39m 1.0.2     
+── [1mConflicts[22m ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+[36mℹ[39m Use the conflicted package ([3m[34m<http://conflicted.r-lib.org/>[39m[23m) to force all conflicts to become errors
+[?25hError in library(cowplot) : there is no package called ‘cowplot’
+Execution halted
+[?25hmake: *** [Makefile:26: figures/correlation_matrix.png] Error 1
+]0;~[?2004hrstudio@67aada3ca579:~$ make figures/linear_reg.org
+[?2004lmake: *** No rule to make target 'figures/linear_reg.org'.  Stop.
+]0;~[?2004hrstudio@67aada3ca579:~$ make figures/linear_reg.org[C[K[K[Kpng
+[?2004lRscript code/visualization.R
+── [1mAttaching core tidyverse packages[22m ────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+[32m✔[39m [34mdplyr    [39m 1.1.4     [32m✔[39m [34mreadr    [39m 2.1.5
+[32m✔[39m [34mforcats  [39m 1.0.0     [32m✔[39m [34mstringr  [39m 1.5.1
+[32m✔[39m [34mggplot2  [39m 3.5.1     [32m✔[39m [34mtibble   [39m 3.2.1
+[32m✔[39m [34mlubridate[39m 1.9.3     [32m✔[39m [34mtidyr    [39m 1.3.1
+[32m✔[39m [34mpurrr    [39m 1.0.2     
+── [1mConflicts[22m ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+[36mℹ[39m Use the conflicted package ([3m[34m<http://conflicted.r-lib.org/>[39m[23m) to force all conflicts to become errors
+[?25hError in library(cowplot) : there is no package called ‘cowplot’
+Execution halted
+[?25hmake: *** [Makefile:30: figures/linear_reg.png] Error 1
+]0;~[?2004hrstudio@67aada3ca579:~$ [?2004l[?2004h[?2004l
+]0;~[?2004hrstudio@74e2766ce9f2:~$ pwd
+[?2004l/home/rstudio
+]0;~[?2004hrstudio@74e2766ce9f2:~$ make report.html
+[?2004lmake: 'report.html' is up to date.
+]0;~[?2004hrstudio@74e2766ce9f2:~$ make report.html
+[?2004lRscript -e "rmarkdown::render('report.Rmd')"
+
+
+processing file: report.Rmd
+  |                                                            |                                                    |   0%  |                                                            |......                                              |  11%                    |                                                            |............                                        |  22% [unnamed-chunk-1]  |                                                            |.................                                   |  33%                    |                                                            |.......................                             |  44% [unnamed-chunk-2]  |                                                            |.............................                       |  56%                    |                                                            |...................................                 |  67% [unnamed-chunk-3]  |                                                            |........................................            |  78% [unnamed-chunk-4]  |                                                            |..............................................      |  89% [unnamed-chunk-5]  |                                                            |....................................................| 100%                                                                                                                              
+output file: report.knit.md
+
+/usr/bin/pandoc +RTS -K512m -RTS report.knit.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --output report.html --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/pagebreak.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmarkdown/lua/latex-div.lua --embed-resources --standalone --variable bs3=TRUE --section-divs --template /usr/local/lib/R/site-library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable theme=bootstrap --mathjax --variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --include-in-header /tmp/Rtmpq9d7kP/rmarkdown-str1b1669cb27e.html 
+
+Output created: report.html
+[?25h[?25h]0;~[?2004hrstudio@74e2766ce9f2:~$ [?2004l[?2004h[?2004l

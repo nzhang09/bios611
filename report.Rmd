@@ -24,11 +24,11 @@ Outcome of this project is the county-level COVID-19 death rate between January 
 County-level age distribution data was downloaded from CDC, which includes the proportions of each 5-year age group. The mean age for each county was calculated, by weighting the middle point of each age group by the population in that age group. County-level pre-COVID mortality rate was pulled from the National Center for Health Statistics Mortality Data on CDC WONDER, to capture the pre-pandemic health situation. Demographics data were pulled from the US Census 2017-2021 American Community Survey using the R `tidycensus` package. Covariates include population structure factors (population density, population identifying as White/Black/Asian/Hispanic or Latino), household factors (total number of households, proportion of married households, proportion of households which needs public assistance, median household income), socioeconomic factors (population without health insurance, population with income below the poverty level, population receiving high school education, GINI index).
 
 
-#Methods
+# Methods
 
 The correlation matrix between the death rates and all covariates were generated to understand the univariate association between the outcome and potential predictors. Covariates with low correlation coefficients with the outcome were removed from the analysis. Since the outcome is continuous, linear regression was first applied to identify significant predictors. LASSO and Elastic Net with 10-fold cross validation were also conducted to perform variable selection and regularization. Coefficient estimates, predictions, and model residuals from three method were presented.
 
-#Results
+# Results
 
 From the correlation matrix (Figure 2), death rate (`deaths_per_100k`) has low correlations with the proportion of White population (`white`), the proportion of Hispanic/Latino population (`hispaniclatino`), and the proportion of households which requires public assistance (`pubassishh`). Given that population disparities is an important factor in public health research, `white` and `hispaniclatino` were retained in the modeling process and `pubassishh` was removed from further analysis.
 
@@ -38,12 +38,12 @@ knitr::include_graphics("figures/correlation_matrix.png")
 
 Based on the modeling results, age, proportion of Asian population, median household income, pre-COVID death rate, proportion of population with no health insurance, and proportion of population receiving high school education were significant in all three models. Proportion of Hispanic/Latino population and proportion of married households were significant in the linear regression and elastic net, but were regulated to 0 in LASSO. Three models had similar performance w.r.t. mean squared error and residuals (Figures 3-5).
 
-```{r}
+```{r, message=F}
 library(tidyverse)
 modeling_coef<-read_csv("derv_data/modeling_coef.csv")
 modeling_coef
 ```
-```{r}
+```{r, message=F}
 #Modeling dataset----
 covid_dat_all_modeling<-read_csv("derv_data/covid_data_all_modeling.csv")
 
@@ -61,14 +61,21 @@ knitr::include_graphics("figures/lasso.png")
 knitr::include_graphics("figures/net.png")
 ```
 
-#Discussion
+# Discussion
+
+One of the most notable findings from this project is that counties with older mean ages were found to have higher COVID-19 mortality rate. Older adults are likely to be more vulnerable to infection due to weakened immune systems. This finding underscores the importance of targeted health interventions for elderly communities during pandemics.
+
+Demographic and socioeconomic factors also played a significant role in shaping COVID-19 mortality rates across the country. Counties with larger proportions of Asian residents were associated with lower death rates. Counties with higher median household income and greater educational attainment also showed lower COVID-19 mortality rates. These factors may be linked to mask-wearing behaviors and adherence to public health guidelines.
+
+Higher pre-COVID death rate is linked with higher COVID-19 death rate, and counties with a higher proportion of uninsured residents experienced significantly higher COVID-19 death rates. This relationship could reflect disparities in healthcare infrastructure, emphasizing the importance of accessible and affordable healthcare.
+
+The machine learning methods, LASSO and Elastic Net, have been shown to be very efficiently in reducing the dimension of the predictors, while keeping the model performance as good as the linear regression. Such efficiency is particularly valuable in public health research, where data collection can be resource-intensive, and simplified models can facilitate timely decision-making and policy implementation.
 
 # References:
 
 https://www.nytimes.com/interactive/2023/us/covid-cases.html
 
 https://covid19.census.gov/datasets/21843f238cbb46b08615fc53e19e0daf/explore
-
 
 https://wonder.cdc.gov/mcd.html
 
