@@ -23,11 +23,12 @@ cor_plot<-ggplot(cor_dat, aes(x=Var1, y=Var2, fill=value)) +
   theme_minimal()+
   theme(axis.text.x=element_text(angle=45, vjust=1, hjust=1)) +
   labs(x=NULL, y=NULL, title="Figure 2. Correlation matrix")
-ggsave("figures/correlation_matrix.png", plot=cor_plot, height=7, width=8)
+ggsave("figures/correlation_matrix.png", plot=cor_plot, height=5, width=6)
 
 #Observed death rate map----
 obs_map<-usmap::plot_usmap(regions="counties", data=covid_dat_all_modeling, values="deaths_per_100k", color=NA)+
   ggtitle("Figure 1. Overall COVID-19 death rates between Jan 2020 and Mar 2023")+
+  labs(subtitle="(Grey area indicates missing data)") +
   scale_fill_distiller(name="observed death rate/100k", palette="OrRd", breaks=c(500, 1000), limits=c(0, 1400), direction=1)+
   theme(legend.position="bottom", 
         legend.justification="center", 
