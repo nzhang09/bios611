@@ -37,6 +37,7 @@ pred_lm<-predict(fit_lm, data=covid_dat_all)
 res_lm<-covid_dat_all$deaths_per_100k-pred_lm
 
 #LASSO regression----
+set.seed(1122)
 df<-covid_dat_all %>%
   dplyr::select(
     avg_age, white, black, asian, hispaniclatino,

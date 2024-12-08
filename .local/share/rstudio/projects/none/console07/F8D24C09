@@ -180,3 +180,6 @@ output file: report.knit.md
 
 Output created: report.html
 [?25h[?25h]0;~[?2004hrstudio@74e2766ce9f2:~$ [?2004l[?2004h[?2004l
+make report.html
+[?2004lmake: 'report.html' is up to date.
+]0;~[?2004hrstudio@4340100dfa53:~$ [?2004l[?2004h[?2004l
